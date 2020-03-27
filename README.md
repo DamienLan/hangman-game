@@ -1,10 +1,15 @@
-## Hangman Game - Jeu du Pendu
+# Hangman Game - Jeu du Pendu
+	
+## 1.Lauch the game:
 
-Content :
-	.py file :
-		main.py : lauch the game
-		game.py : class game
-		word.py : class word
-		letter.py : class letter
-	data :
-		word_database.txt : word to guess
+Run in a powershell :
+```bash
+python main.py
+```
+
+Chose the level with -l (--level) argument : 'hard', 'medium' or 'easy'
+
+    python main.py -l medium
+    
+The default level is easy. 
+

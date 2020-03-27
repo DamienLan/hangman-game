@@ -2,8 +2,9 @@
 Main program for the "Jeu du Pendu"
 """
 import argparse
+import re
 
-import class.game as g
+import modules.game as g
 
 
 def parse_arguments():
@@ -14,29 +15,37 @@ def parse_arguments():
     return parser.parse_args()
 
 
+def ask_new_letter():
+    """
+    Ask a new letter at the player
+    :return: charactere chosen
+    """
+    condition = False
+    while not condition:
+        char = input("Nouvelle lettre :\n").upper()
+        if re.match('[A-Z]$', char):
+            condition = True
+        else:
+            print("Charactère invalide...")
+    return char
+
+
 def main():
     """
     main function, process the game
     :return: None
     """
     args = parse_arguments()
-
     game = g.Game(args.level)
 
     print("Bienvenue !\n")
+
     while game.in_process:
         game.display()
-        condition = False
-        while not condition:
-            char = input("Nouvelle lettre :\n").upper()
-            if isinstance(char, str) and len(char) == 1:
-                condition = True
-            else:
-                print("Charactère invalide...")
-
+        char = ask_new_letter()
         game.upgrade(char)
 
-    if game.won:
+    if game.word.found:
         print("Félicitations !! Tu as trouvé :")
         game.display_answer()
     else:
